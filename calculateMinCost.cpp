@@ -1,6 +1,8 @@
 // calculateMinCost.cpp
 #include "Node.h"
 #include <iostream>
+#include <unordered_map>
+#include <climits>     // for INT_MAX
 
 
 int calculateMinCost(Node* currentNode, std::unordered_map<Node*, int>& memo) {
@@ -24,7 +26,7 @@ int calculateMinCost(Node* currentNode, std::unordered_map<Node*, int>& memo) {
     }
 
     // 4. Calculate minimal cost using available library gates [1]
-    int minCost = std::INT_MAX; // Start with a very high number
+    int minCost = INT_MAX; // Start with a very high number
 
     // Example: Check standard NAND
     if (currentNode->gate == "NAND") {
