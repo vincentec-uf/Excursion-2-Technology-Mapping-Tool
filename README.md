@@ -30,20 +30,13 @@ The program performs structural matching on the NAND-NOT tree to determine the m
 
 ## File Structure
 
-- `parser.cpp`  
+- `excursion2_tech_mapping.cpp` 
+  Defines the Node structure used to represent the circuit. 
   Parses the input netlist and constructs the circuit tree.
-
-- `convertNandNot.cpp`  
-  Converts the original Boolean tree into an equivalent NAND-NOT representation.
-
-- `calculateMinCost.cpp`  
-  Recursively computes the minimal cost using dynamic programming and pattern matching against the technology library.
-
-- `test_all.cpp`  
+  Converts the original Boolean tree into an equivalent NAND-NOT representation. 
+  Recursively computes the minimal cost using dynamic programming and pattern    matching against the technology library.  
   Main driver file that runs the full flow and writes the result to `output.txt`.
 
-- `Node.h`  
-  Defines the Node structure used to represent the circuit.
 
 - `netlist.txt`  
   Input file containing the Boolean netlist.
@@ -58,6 +51,6 @@ The program performs structural matching on the NAND-NOT tree to determine the m
 Run the following command in the terminal:
 
 ```bash
-g++ -std=c++11 parser.cpp convertNandNot.cpp calculateMinCost.cpp test_all.cpp -o excursion2
+g++ -std=c++11 execursion2_tech_mapping.cpp -o excursion2
 
 ./excursion2
