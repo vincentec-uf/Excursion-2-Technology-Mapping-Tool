@@ -351,7 +351,7 @@ int calculateMinCost(Node *currentNode, std::unordered_map<Node *, int> &memo)
 }
 
 int main() {
-    Node* original = buildTree("input.txt");
+    Node* original = buildTree("netlist.txt");
     if (!original) return 1;
 
     Node* nandRoot = convertNandNot(original);
