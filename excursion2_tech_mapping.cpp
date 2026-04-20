@@ -350,6 +350,10 @@ int calculateMinCost(Node *currentNode, std::unordered_map<Node *, int> &memo)
     return minCost;
 }
 
+Node* buildTree(const std::string& filename);
+Node* convertNandNot(Node* original);
+int calculateMinCost(Node* currentNode, std::unordered_map<Node*, int>& memo);
+
 int main() {
     Node* original = buildTree("netlist.txt");
     if (!original) return 1;
@@ -360,7 +364,7 @@ int main() {
     std::unordered_map<Node*, int> memo;
     int minCost = calculateMinCost(nandRoot, memo);
 
-    std::cout << "\n=== FINAL MIN COST ===\n";
+    std::cout << "\n=== FINAL MIN COST (placeholder only) ===\n";
     std::cout << minCost << std::endl;
 
     std::ofstream out("output.txt");
@@ -368,7 +372,6 @@ int main() {
         out << minCost << std::endl;
         std::cout << "output.txt created with cost: " << minCost << std::endl;
     }
-    deleteTree(original);
-    deleteTree(nandRoot);
+
     return 0;
 }
