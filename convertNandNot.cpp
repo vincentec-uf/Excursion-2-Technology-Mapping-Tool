@@ -37,3 +37,11 @@ Node* convertNandNot(Node* original) {
 		return nullptr;
 	}
 }
+// helper function to prevent memory leaks
+void deleteTree(Node* node) {
+    if (node == nullptr) return;
+    for (Node* child : node->children) {
+        deleteTree(child);
+    }
+    delete node;
+}
