@@ -349,3 +349,26 @@ int calculateMinCost(Node *currentNode, std::unordered_map<Node *, int> &memo)
     memo[currentNode] = minCost;
     return minCost;
 }
+
+int main() {
+    Node* original = buildTree("input.txt");
+    if (!original) return 1;
+
+    Node* nandRoot = convertNandNot(original);
+    if (!nandRoot) return 1;
+
+    std::unordered_map<Node*, int> memo;
+    int minCost = calculateMinCost(nandRoot, memo);
+
+    std::cout << "\n=== FINAL MIN COST ===\n";
+    std::cout << minCost << std::endl;
+
+    std::ofstream out("output.txt");
+    if (out) {
+        out << minCost << std::endl;
+        std::cout << "output.txt created with cost: " << minCost << std::endl;
+    }
+    deleteTree(original);
+    deleteTree(nandRoot);
+    return 0;
+}
