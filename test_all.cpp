@@ -19,7 +19,7 @@ int main() {
     std::unordered_map<Node*, int> memo;
     int minCost = calculateMinCost(nandRoot, memo);
 
-    std::cout << "\n=== FINAL MIN COST (placeholder only) ===\n";
+    std::cout << "\n=== FINAL MIN COST ===\n";
     std::cout << minCost << std::endl;
 
     std::ofstream out("output.txt");
