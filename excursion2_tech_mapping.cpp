@@ -202,8 +202,8 @@ Node *convertNandNot(Node *original)
     }
     else
     {
-        std::cerr << "Error: Unsupported gate type: " << original->gate << std::endl;
-        return nullptr;
+        //std::cerr << "Error: Unsupported gate type: " << original->gate << std::endl;
+        return new Node{original->name, original->gate, {leftChild, rightChild}};
     }
 }
 
@@ -231,7 +231,6 @@ static Node *stripDoubleNot(Node *node)
 
 int calculateMinCost(Node *currentNode, std::unordered_map<Node *, int> &memo)
 {
-    currentNode = stripDoubleNot(currentNode); // Normalize possible NOT(NOT(X)) wrappers caused by conversion
     // Base cases
     if (currentNode == nullptr)
         return 0;
@@ -369,7 +368,7 @@ int main()
     std::unordered_map<Node *, int> memo;
     int minCost = calculateMinCost(nandRoot, memo);
 
-    std::cout << "\n=== FINAL MIN COST (placeholder only) ===\n";
+    std::cout << "\n ------FINAL MIN COST ------\n";
     std::cout << minCost << std::endl;
 
     std::ofstream out("output.txt");
