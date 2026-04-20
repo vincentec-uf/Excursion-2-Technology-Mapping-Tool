@@ -18,10 +18,11 @@ static const int COST_OR2 = 4;
 static const int COST_AOI21 = 7;
 static const int COST_AOI22 = 7;
 
-struct Node {
-    std::string name;           // e.g. "t1", "F", "a"
-    std::string gate;           // "INPUT", "OUTPUT", "AND", "OR", "NOT"
-    std::vector<Node*> children; // 0 children = INPUT, 1 = NOT, 2 = AND/OR
+struct Node
+{
+    std::string name;             // e.g. "t1", "F", "a"
+    std::string gate;             // "INPUT", "OUTPUT", "AND", "OR", "NOT"
+    std::vector<Node *> children; // 0 children = INPUT, 1 = NOT, 2 = AND/OR
 };
 
 Node *buildTree(const std::string &filename)
@@ -230,6 +231,7 @@ static Node *stripDoubleNot(Node *node)
 
 int calculateMinCost(Node *currentNode, std::unordered_map<Node *, int> &memo)
 {
+    currentNode = stripDoubleNot(currentNode); // Normalize possible NOT(NOT(X)) wrappers caused by conversion
     // Base cases
     if (currentNode == nullptr)
         return 0;
@@ -350,25 +352,29 @@ int calculateMinCost(Node *currentNode, std::unordered_map<Node *, int> &memo)
     return minCost;
 }
 
-Node* buildTree(const std::string& filename);
-Node* convertNandNot(Node* original);
-int calculateMinCost(Node* currentNode, std::unordered_map<Node*, int>& memo);
+Node *buildTree(const std::string &filename);
+Node *convertNandNot(Node *original);
+int calculateMinCost(Node *currentNode, std::unordered_map<Node *, int> &memo);
 
-int main() {
-    Node* original = buildTree("netlist.txt");
-    if (!original) return 1;
+int main()
+{
+    Node *original = buildTree("netlist.txt");
+    if (!original)
+        return 1;
 
-    Node* nandRoot = convertNandNot(original);
-    if (!nandRoot) return 1;
+    Node *nandRoot = convertNandNot(original);
+    if (!nandRoot)
+        return 1;
 
-    std::unordered_map<Node*, int> memo;
+    std::unordered_map<Node *, int> memo;
     int minCost = calculateMinCost(nandRoot, memo);
 
     std::cout << "\n=== FINAL MIN COST (placeholder only) ===\n";
     std::cout << minCost << std::endl;
 
     std::ofstream out("output.txt");
-    if (out) {
+    if (out)
+    {
         out << minCost << std::endl;
         std::cout << "output.txt created with cost: " << minCost << std::endl;
     }
